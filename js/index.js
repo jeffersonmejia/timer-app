@@ -29,6 +29,7 @@ function resetTimer() {
 	const copy = $resetButton.textContent
 	$resetButton.textContent = '...'
 	$startButton.disabled = true
+	$resetButton.disabled = true
 	$startButton.classList.add('disabled-button')
 	setTimeout(() => {
 		if (!$timerForm.classList.contains('hidden')) {
@@ -40,6 +41,7 @@ function resetTimer() {
 		$timer.textContent = DEFAULT_TIME
 		$resetButton.textContent = copy
 		$startButton.disabled = false
+		$resetButton.disabled = false
 		$startButton.classList.remove('disabled-button')
 	}, 1000)
 }
