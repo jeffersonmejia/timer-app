@@ -12,14 +12,16 @@
 		/>
 		<link rel="stylesheet" href="./styles/index.css" />
 	</head>
-	<body>
+	<body data-dark>
 		<main class="app">
 			<header>
-				<h1>Counter App</h1>
-				<nav></nav>
+				<h1 data-dark>Timer App</h1>
+				<nav>
+					<button class="dark-button" data-dark>🌙</button>
+				</nav>
 			</header>
 			<section>
-				<h2 class="timer">00:05:00</h2>
+				<h2 class="timer" data-dark>00:05:00</h2>
 				<form class="timer-form hidden">
 					<fieldset>
 						<label for="timer-form-hour">Horas</label>
@@ -35,8 +37,10 @@
 					</fieldset>
 				</form>
 				<div class="group-button" id="group-button-timer">
-					<button class="primary-button" id="handle-timer-button">Iniciar</button>
-					<button class="secondary-button" id="reset-button">Reset</button>
+					<button class="primary-button" data-dark id="handle-timer-button">
+						Iniciar
+					</button>
+					<button class="secondary-button" id="reset-button" data-dark>Reset</button>
 				</div>
 			</section>
 		</main>

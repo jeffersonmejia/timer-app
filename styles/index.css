@@ -15,6 +15,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding-right: 1rem;
 }
 .app section {
 	width: 100%;
@@ -22,11 +23,30 @@ body {
 	flex-direction: column;
 	align-items: center;
 	gap: 1rem;
+	padding-right: 51.5px;
 }
 .app header {
+	width: 100%;
 	margin-top: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
-.app :is(h1, h2) {
+nav {
+	display: flex;
+}
+.dark-button {
+	flex-grow: 1;
+	background-color: #f3f3f3;
+	border-radius: 50%;
+	padding: 1rem;
+	border: none;
+	transition: background-color 0.3s ease-in-out;
+}
+.dark-button:hover {
+	background-color: hsl(0, 0%, 93%);
+}
+.app :is(h1) {
 	width: 100%;
 	text-align: center;
 }
@@ -103,6 +123,34 @@ button {
 .disabled-button {
 	background-color: gray;
 	cursor: default;
+}
+body.dark-theme {
+	background-color: rgb(32, 32, 32);
+}
+.dark-button.dark-theme {
+	background-color: rgb(40, 40, 40);
+}
+.dark-button.dark-theme:hover {
+	background-color: rgb(44, 44, 44);
+}
+.primary-button.dark-theme {
+	background-color: hsl(214, 82%, 32%);
+}
+.primary-button.dark-theme:hover {
+	background-color: hsl(214, 82%, 40%);
+}
+
+.secondary-button.dark-theme {
+	background-color: transparent;
+}
+.secondary-button.dark-theme:hover {
+	background-color: rgb(40, 40, 40);
+}
+h1.dark-theme {
+	color: rgb(170, 170, 170);
+}
+.timer.dark-theme {
+	color: rgb(190, 190, 190);
 }
 .hidden {
 	display: none;

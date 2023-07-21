@@ -3,6 +3,7 @@ const d = document,
 	$startButton = d.getElementById('handle-timer-button'),
 	$resetButton = d.getElementById('reset-button'),
 	$timer = d.querySelector('.timer'),
+	$darkButton = d.querySelector('.dark-button'),
 	$timerForm = d.querySelector('.timer-form')
 const DEFAULT_TIME = '00:05:00'
 let timerInterval = null
@@ -65,6 +66,7 @@ function resetTimer() {
 
 		$timer.textContent = DEFAULT_TIME
 		$resetButton.textContent = copy
+		localStorage.setItem('time', $timer.textContent)
 		$startButton.disabled = false
 		$resetButton.disabled = false
 		$startButton.classList.remove('disabled-button')
@@ -81,7 +83,17 @@ d.addEventListener('DOMContentLoaded', (e) => {
 	if (prevTime.length > 0 && prevTime !== DEFAULT_TIME) {
 		$timer.textContent = prevTime
 	}
+	const theme = localStorage.getItem('theme')
+	if (theme === '☀️') {
+		$darkButton.textContent = '☀️'
+		toggleTheme()
+	}
 })
+
+function toggleTheme() {
+	const $darkEl = d.querySelectorAll('[data-dark]')
+	$darkEl.forEach((el) => el.classList.toggle('dark-theme'))
+}
 
 d.addEventListener('click', (e) => {
 	if (e.target.matches('#handle-timer-button')) {
@@ -93,6 +105,11 @@ d.addEventListener('click', (e) => {
 	if (e.target.matches('.timer')) {
 		$startButton.textContent = 'Iniciar'
 		$timerForm.classList.remove('hidden')
+	}
+	if (e.target.matches('.dark-button')) {
+		e.target.textContent = e.target.textContent === '☀️' ? '🌙' : '☀️'
+		localStorage.setItem('theme', e.target.textContent)
+		toggleTheme()
 	}
 })
 
