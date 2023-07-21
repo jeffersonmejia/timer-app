@@ -62,20 +62,32 @@ nav {
 	align-items: center;
 	justify-content: center;
 	gap: 1.5rem;
+	margin-bottom: 0.5rem;
 }
 
 .timer-form fieldset {
 	border: none;
 	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
 	gap: 6px;
 }
 .timer-form label {
 	font-size: 0.85rem;
 }
 .timer-form input[type='text'] {
-	width: 2.5rem;
+	width: 2.7rem;
+	border-radius: 8px;
+	padding: 8px 12px;
+	outline: none;
+	border: 1px solid rgb(212, 212, 212);
 }
-
+.timer-form input[type='text']:focus {
+	border: 1px solid #1a73e8;
+}
+.timer-form input[type='text']:focus + label {
+	color: #1a73e8;
+}
 .timer-form .group-button {
 	flex-grow: 1;
 }
@@ -151,6 +163,17 @@ h1.dark-theme {
 }
 .timer.dark-theme {
 	color: rgb(190, 190, 190);
+}
+.timer-form.dark-theme input {
+	background-color: rgb(44, 44, 44);
+	color: rgb(190, 190, 190);
+	border: 1px solid transparent;
+}
+.timer-form input[type='text'].dark-theme:focus {
+	border: 1px solid hsl(214, 82%, 32%);
+}
+.timer-form input[type='text']:focus.dark-theme + label {
+	color: hsl(214, 82%, 32%);
 }
 .hidden {
 	display: none;

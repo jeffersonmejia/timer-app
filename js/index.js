@@ -11,6 +11,9 @@ let timerInterval = null
 function startTimer() {
 	if (!$timerForm.classList.contains('hidden')) {
 		$timerForm.classList.add('hidden')
+		$timerForm.querySelectorAll('input').forEach((input) => {
+			input.value = ''
+		})
 	}
 	const isStarted = $startButton.textContent === 'Iniciar'
 	$startButton.textContent = isStarted ? 'Pausar' : 'Iniciar'
@@ -18,6 +21,7 @@ function startTimer() {
 	let [hours, minutes, seconds] = $timer.textContent.split(':')
 
 	timerInterval = setInterval(() => {
+		console.log('running...')
 		hours = parseInt(hours)
 		minutes = parseInt(minutes)
 		seconds = parseInt(seconds)
