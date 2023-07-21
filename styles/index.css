@@ -15,7 +15,6 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding-right: 1rem;
 }
 .app section {
 	width: 100%;
@@ -23,7 +22,6 @@ body {
 	flex-direction: column;
 	align-items: center;
 	gap: 1rem;
-	padding-right: 51.5px;
 }
 .app header {
 	width: 100%;
@@ -40,15 +38,17 @@ nav {
 	background-color: #f3f3f3;
 	border-radius: 50%;
 	padding: 1rem;
+	margin-right: 1rem;
 	border: none;
 	transition: background-color 0.3s ease-in-out;
 }
 .dark-button:hover {
 	background-color: hsl(0, 0%, 93%);
 }
-.app :is(h1) {
+.app h1 {
 	width: 100%;
-	text-align: center;
+	text-align: left;
+	padding-left: 1rem;
 }
 .timer {
 	cursor: pointer;
@@ -194,5 +194,15 @@ h1.dark-theme {
 	to {
 		opacity: 1;
 		transform: translateY(0);
+	}
+}
+@media screen and (min-width: 600px) {
+	.app section {
+		padding-right: 51.5px;
+	}
+	.app h1 {
+		width: 100%;
+		text-align: center;
+		padding-left: 0;
 	}
 }
