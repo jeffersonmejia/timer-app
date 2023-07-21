@@ -1,0 +1,109 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html,
+body {
+	height: 100vh;
+	width: 100vw;
+	font-family: 'Roboto', sans-serif;
+}
+.app {
+	color: #70757a;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.app section {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+.app header {
+	margin-top: 2rem;
+}
+.app :is(h1, h2) {
+	width: 100%;
+	text-align: center;
+}
+.timer {
+	cursor: pointer;
+	margin-top: 1rem;
+	color: rgb(80, 80, 80);
+}
+.timer-form {
+	width: 80%;
+	flex-wrap: wrap;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1.5rem;
+}
+
+.timer-form fieldset {
+	border: none;
+	display: flex;
+	gap: 6px;
+}
+.timer-form label {
+	font-size: 0.85rem;
+}
+.timer-form input[type='text'] {
+	width: 2.5rem;
+}
+
+.timer-form .group-button {
+	flex-grow: 1;
+}
+.timer-form :is(input[type='submit'], input[type='reset']) {
+	cursor: pointer;
+}
+.group-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+}
+button {
+	cursor: pointer;
+}
+
+.primary-button {
+	background-color: #1a73e8;
+	color: white;
+	border: none;
+	padding: 0.5rem;
+	border-radius: 8px;
+}
+
+.primary-button,
+.secondary-button {
+	transition: background-color 0.3s ease-in-out;
+	min-width: 6rem;
+}
+
+.primary-button:hover {
+	background-color: #1f7af1;
+}
+
+.secondary-button {
+	padding: 0.5rem;
+	border-radius: 8px;
+	background-color: white;
+	border: none;
+	color: #70757a;
+}
+.secondary-button:hover {
+	background-color: #f3f3f3;
+}
+.disabled-button {
+	background-color: gray;
+	cursor: default;
+}
+.hidden {
+	display: none;
+}

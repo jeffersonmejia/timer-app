@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Timer App</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./styles/index.css" />
+	</head>
+	<body>
+		<main class="app">
+			<header>
+				<h1>Counter App</h1>
+			</header>
+			<section>
+				<h2 class="timer">00:05:00</h2>
+				<form class="timer-form hidden">
+					<fieldset>
+						<label for="timer-form-hour">Horas</label>
+						<input type="text" maxlength="2" id="timer-form-hour" />
+					</fieldset>
+					<fieldset>
+						<label for="timer-form-minutes">Minutos</label>
+						<input type="text" maxlength="2" id="timer-form-minutes" />
+					</fieldset>
+					<fieldset>
+						<label for="timer-form-seconds">Segundos</label>
+						<input type="text" maxlength="2" id="timer-form-seconds" />
+					</fieldset>
+				</form>
+				<div class="group-button" id="group-button-timer">
+					<button class="primary-button" id="handle-timer-button">Iniciar</button>
+					<button class="secondary-button" id="reset-button">Reset</button>
+				</div>
+			</section>
+		</main>
+		<script src="./js/index.js"></script>
+	</body>
+</html>
