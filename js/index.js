@@ -108,7 +108,7 @@ d.addEventListener('click', (e) => {
 	}
 	if (e.target.matches('.timer')) {
 		$startButton.textContent = 'Iniciar'
-		$timerForm.classList.remove('hidden')
+		$timerForm.classList.toggle('hidden')
 	}
 	if (e.target.matches('.dark-button')) {
 		e.target.textContent = e.target.textContent === '☀️' ? '🌙' : '☀️'

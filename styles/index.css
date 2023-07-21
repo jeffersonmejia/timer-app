@@ -55,6 +55,11 @@ nav {
 	margin-top: 1rem;
 	color: rgb(80, 80, 80);
 }
+.not-selectable {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
 .timer-form {
 	width: 80%;
 	flex-wrap: wrap;
@@ -63,6 +68,7 @@ nav {
 	justify-content: center;
 	gap: 1.5rem;
 	margin-bottom: 0.5rem;
+	animation: opacity 0.3s ease-in-out;
 }
 
 .timer-form fieldset {
@@ -81,6 +87,7 @@ nav {
 	padding: 8px 12px;
 	outline: none;
 	border: 1px solid rgb(212, 212, 212);
+	color: gray;
 }
 .timer-form input[type='text']:focus {
 	border: 1px solid #1a73e8;
@@ -177,4 +184,15 @@ h1.dark-theme {
 }
 .hidden {
 	display: none;
+}
+
+@keyframes opacity {
+	from {
+		opacity: 0;
+		transform: translateY(5px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
