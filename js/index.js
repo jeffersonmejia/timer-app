@@ -5,6 +5,7 @@ const d = document,
 	$timer = d.querySelector('.timer'),
 	$timerForm = d.querySelector('.timer-form')
 const DEFAULT_TIME = '00:05:00'
+let timerInterval = null
 
 function startTimer() {
 	if (!$timerForm.classList.contains('hidden')) {
@@ -13,19 +14,43 @@ function startTimer() {
 	const isStarted = $startButton.textContent === 'Iniciar'
 	$startButton.textContent = isStarted ? 'Pausar' : 'Iniciar'
 
-	const time = $timer.textContent.split(':'),
-		hours = parseInt(time[0]),
-		minutes = parseInt(time[1]),
-		seconds = parseInt(time[2])
+	let [hours, minutes, seconds] = $timer.textContent.split(':')
 
-	console.log(hours, minutes, seconds)
-
-	/*const timerInterval = setInterval(() => {
-
+	timerInterval = setInterval(() => {
+		hours = parseInt(hours)
+		minutes = parseInt(minutes)
+		seconds = parseInt(seconds)
+		if ($startButton.textContent === 'Iniciar') {
+			clearInterval(timerInterval)
+			return
+		}
+		if (hours === 0 && minutes === 0 && seconds === 0) {
+			$timer.textContent = DEFAULT_TIME
+			console.log($timer.textContent)
+			$startButton.textContent = 'Iniciar'
+			clearInterval(timerInterval)
+			return
+		}
+		if (seconds === 0) {
+			if (minutes === 0) {
+				hours -= 1
+				minutes = 59
+			} else {
+				minutes -= 1
+			}
+			seconds = 59
+		} else {
+			seconds -= 1
+		}
+		hours = getFormattedTime(`${hours}`)
+		minutes = getFormattedTime(`${minutes}`)
+		seconds = getFormattedTime(`${seconds}`)
 		$timer.textContent = `${hours}:${minutes}:${seconds}`
-	}, 1000)*/
+		localStorage.setItem('time', $timer.textContent)
+	}, 1000)
 }
 function resetTimer() {
+	clearInterval(timerInterval)
 	const copy = $resetButton.textContent
 	$resetButton.textContent = '...'
 	$startButton.disabled = true
@@ -45,6 +70,18 @@ function resetTimer() {
 		$startButton.classList.remove('disabled-button')
 	}, 1000)
 }
+function getFormattedTime(time) {
+	if (parseInt(time) > 60) return '60'
+	if (time.length > 1) return time
+	if (time.length === 1) return `0${time}`
+}
+
+d.addEventListener('DOMContentLoaded', (e) => {
+	const prevTime = localStorage.getItem('time')
+	if (prevTime.length > 0 && prevTime !== DEFAULT_TIME) {
+		$timer.textContent = prevTime
+	}
+})
 
 d.addEventListener('click', (e) => {
 	if (e.target.matches('#handle-timer-button')) {
@@ -58,12 +95,6 @@ d.addEventListener('click', (e) => {
 		$timerForm.classList.remove('hidden')
 	}
 })
-
-function getFormattedTime(time) {
-	if (parseInt(time) > 60) return '60'
-	if (time.length > 1) return time
-	if (time.length === 1) return `0${time}`
-}
 
 d.addEventListener('keyup', (e) => {
 	if (e.target.value.length > 0) {
