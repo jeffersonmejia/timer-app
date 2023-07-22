@@ -17,8 +17,13 @@ function startTimer() {
 			input.value = ''
 		})
 	}
+
 	const isStarted = $startButton.textContent.includes('Iniciar')
 	$startButton.textContent = isStarted ? 'Pausar' : 'Iniciar'
+	if (!isStarted) {
+		clearInterval(timerInterval)
+		return
+	}
 
 	let [hours, minutes, seconds] = $timer.textContent.split(':')
 
@@ -27,10 +32,7 @@ function startTimer() {
 		hours = parseInt(hours)
 		minutes = parseInt(minutes)
 		seconds = parseInt(seconds)
-		if ($startButton.textContent === 'Iniciar') {
-			clearInterval(timerInterval)
-			return
-		}
+
 		if (hours === 0 && minutes === 0 && seconds === 0) {
 			$timer.textContent = DEFAULT_TIME
 			console.log($timer.textContent)
