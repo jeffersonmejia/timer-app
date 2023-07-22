@@ -9,6 +9,7 @@ const d = document,
 
 const DEFAULT_TIME = '00:05:00'
 let timerInterval = null
+let alarmInterval = null
 
 function startTimer() {
 	if (!$timerForm.classList.contains('hidden')) {
@@ -21,8 +22,12 @@ function startTimer() {
 	const isStarted = $startButton.textContent.includes('Iniciar')
 	$startButton.textContent = isStarted ? 'Pausar' : 'Iniciar'
 	if (!isStarted) {
+		$startButton.classList.remove('warning-button')
 		clearInterval(timerInterval)
 		return
+	}
+	if (isStarted) {
+		$startButton.classList.add('warning-button')
 	}
 
 	let [hours, minutes, seconds] = $timer.textContent.split(':')
@@ -33,9 +38,25 @@ function startTimer() {
 		seconds = parseInt(seconds)
 
 		if (hours === 0 && minutes === 0 && seconds === 0) {
-			$timer.textContent = DEFAULT_TIME
-			console.log($timer.textContent)
-			$startButton.textContent = 'Iniciar'
+			let alarmTime = 30
+			const alarmSound = new Audio('../assets/audio/alarm.ogg')
+			$startButton.classList.remove('warning-button')
+			$startButton.classList.add('danger-button')
+			alarmInterval = setInterval(() => {
+				alarmSound.play()
+				alarmTime -= 1
+				$startButton.textContent = `Detener alarma(${alarmTime}s)`
+				if (alarmTime === 0) {
+					alarmSound.currentTime = 0
+					alarmSound.pause()
+					$timer.textContent = DEFAULT_TIME
+					$startButton.textContent = 'Iniciar'
+					$startButton.classList.remove('danger-button')
+					localStorage.setItem('time', $timer.textContent)
+					clearInterval(alarmInterval)
+					return
+				}
+			}, 1000)
 			clearInterval(timerInterval)
 			return
 		}
@@ -64,6 +85,8 @@ function resetTimer() {
 	$startButton.disabled = true
 	$resetButton.disabled = true
 	$startButton.classList.add('disabled-button')
+	if (alarmInterval) clearInterval(alarmInterval)
+
 	setTimeout(() => {
 		if (!$timerForm.classList.contains('hidden')) {
 			$timerForm.elements['timer-form-hour'].value = ''
@@ -74,9 +97,8 @@ function resetTimer() {
 		$timer.textContent = DEFAULT_TIME
 		$resetButton.textContent = copy
 		localStorage.setItem('time', $timer.textContent)
-		if ($startButton.textContent.includes('Pausar')) {
-			$startButton.textContent = 'Iniciar'
-		}
+		$startButton.classList.remove('warning-button', 'danger-button')
+		$startButton.textContent = 'Iniciar'
 		$startButton.disabled = false
 		$resetButton.disabled = false
 		$startButton.classList.remove('disabled-button')
