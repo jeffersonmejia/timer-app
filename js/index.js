@@ -18,9 +18,15 @@ function startTimer() {
 			input.value = ''
 		})
 	}
-
+	if ($startButton.textContent.includes('Detener alarma')) {
+		clearInterval(alarmInterval)
+		$startButton.textContent = 'Iniciar'
+		$startButton.classList.remove('danger-button')
+		return
+	}
 	const isStarted = $startButton.textContent.includes('Iniciar')
 	$startButton.textContent = isStarted ? 'Pausar' : 'Iniciar'
+
 	if (!isStarted) {
 		$startButton.classList.remove('warning-button')
 		clearInterval(timerInterval)
@@ -53,6 +59,9 @@ function startTimer() {
 					$startButton.textContent = 'Iniciar'
 					$startButton.classList.remove('danger-button')
 					localStorage.setItem('time', $timer.textContent)
+					$timerTaskName.textContent = 'Escribe tu nueva tarea'
+					localStorage.setItem('taskName', $timerTaskName.textContent)
+					$timerTaskName.focus()
 					clearInterval(alarmInterval)
 					return
 				}
@@ -113,7 +122,11 @@ function getFormattedTime(time) {
 d.addEventListener('DOMContentLoaded', (e) => {
 	const prevTime = localStorage.getItem('time')
 	if (prevTime.length > 0 && prevTime !== DEFAULT_TIME) {
-		$timer.textContent = prevTime
+		if (prevTime !== '00:00:00') {
+			$timer.textContent = prevTime
+		} else {
+			$timer.textContent = DEFAULT_TIME
+		}
 	}
 	const theme = localStorage.getItem('theme')
 	if (theme === '☀️') {
@@ -124,7 +137,8 @@ d.addEventListener('DOMContentLoaded', (e) => {
 	if (taskName?.length > 0) {
 		$timerTaskName.textContent = taskName
 	} else if (!taskName) {
-		$timerTaskName.textContent = 'Nombre de tarea'
+		$timerTaskName.textContent = 'Escribe tu nueva tarea'
+		$timerTaskName.focus()
 	}
 })
 
@@ -143,6 +157,7 @@ d.addEventListener('click', (e) => {
 	if (e.target.matches('.timer')) {
 		clearInterval(timerInterval)
 		$startButton.textContent = 'Iniciar'
+		$startButton.classList.remove('warning-button', 'danger-button')
 		$timerForm.classList.toggle('hidden')
 	}
 	if (e.target.matches('.dark-button')) {
@@ -169,8 +184,13 @@ d.addEventListener('keyup', (e) => {
 		}
 	}
 	if (e.target.matches('.timer-task-name')) {
+		console.log(e.target.textContent)
+
 		if (e.target.textContent.length > 0) {
 			localStorage.setItem('taskName', e.target.textContent)
+		}
+		if (e.target.textContent.length === 0) {
+			localStorage.setItem('taskName', '')
 		}
 	}
 })
