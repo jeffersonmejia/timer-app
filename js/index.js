@@ -39,7 +39,7 @@ function startTimer() {
 
 		if (hours === 0 && minutes === 0 && seconds === 0) {
 			let alarmTime = 30
-			const alarmSound = new Audio('../assets/audio/alarm.ogg')
+			const alarmSound = new Audio('../assets/audio/alarm.mp3')
 			$startButton.classList.remove('warning-button')
 			$startButton.classList.add('danger-button')
 			alarmInterval = setInterval(() => {
@@ -182,7 +182,12 @@ d.addEventListener('keydown', (e) => {
 	}
 	if (e.target.matches('.timer-form input')) {
 		let onlyNumbers = /^[0-9]$/
-		if (!onlyNumbers.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete') {
+		if (
+			!onlyNumbers.test(e.key) &&
+			e.key !== 'Backspace' &&
+			e.key !== 'Delete' &&
+			e.key !== 'Tab'
+		) {
 			e.preventDefault()
 		}
 	}
