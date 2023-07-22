@@ -4,7 +4,9 @@ const d = document,
 	$resetButton = d.getElementById('reset-button'),
 	$timer = d.querySelector('.timer'),
 	$darkButton = d.querySelector('.dark-button'),
-	$timerForm = d.querySelector('.timer-form')
+	$timerForm = d.querySelector('.timer-form'),
+	$timerTaskName = d.querySelector('.timer-task-name')
+
 const DEFAULT_TIME = '00:05:00'
 let timerInterval = null
 
@@ -92,6 +94,12 @@ d.addEventListener('DOMContentLoaded', (e) => {
 		$darkButton.textContent = '☀️'
 		toggleTheme()
 	}
+	const taskName = localStorage.getItem('taskName')
+	if (taskName?.length > 0) {
+		$timerTaskName.textContent = taskName
+	} else if (!taskName) {
+		$timerTaskName.textContent = 'Nombre de tarea'
+	}
 })
 
 function toggleTheme() {
@@ -118,7 +126,7 @@ d.addEventListener('click', (e) => {
 })
 
 d.addEventListener('keyup', (e) => {
-	if (e.target.value.length > 0) {
+	if (e.target.value?.length > 0) {
 		let [hours, minutes, seconds] = $timer.textContent.split(':')
 		if (e.target.matches('#timer-form-hour')) {
 			hours = getFormattedTime(e.target.value)
@@ -132,5 +140,17 @@ d.addEventListener('keyup', (e) => {
 			seconds = getFormattedTime(e.target.value)
 			$timer.textContent = `${hours}:${minutes}:${seconds}`
 		}
+	}
+	if (e.target.matches('.timer-task-name')) {
+		if (e.target.textContent.length > 0) {
+			localStorage.setItem('taskName', e.target.textContent)
+		}
+	}
+})
+
+d.addEventListener('keydown', (e) => {
+	if (e.target.matches('.timer-task-name')) {
+		if (e.target.textContent.length > 16 && e.key !== 'Backspace') e.preventDefault()
+		if (e.key === 'Enter') e.preventDefault()
 	}
 })

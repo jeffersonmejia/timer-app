@@ -17,14 +17,20 @@ body {
 	align-items: center;
 }
 .app section {
-	width: 100%;
+	width: 80%;
+	max-width: 450px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 1rem;
+	gap: 2rem;
+	border: 1px solid rgb(240, 240, 240);
+	border-radius: 8px;
+	padding: 2rem 0;
+	margin-top: 3rem;
 }
 .app header {
 	width: 100%;
+	max-width: 1200px;
 	margin-top: 2rem;
 	display: flex;
 	align-items: center;
@@ -48,12 +54,20 @@ nav {
 .app h1 {
 	width: 100%;
 	text-align: left;
+	font-size: 16px;
+	text-transform: uppercase;
 	padding-left: 1rem;
+}
+.app h2 {
+	width: fit-content;
+	font-size: 1.8rem;
+
+	outline: none;
 }
 .timer {
 	cursor: pointer;
-	margin-top: 1rem;
 	color: rgb(80, 80, 80);
+	font-size: 2rem;
 }
 .not-selectable {
 	-webkit-user-select: none;
@@ -64,11 +78,13 @@ nav {
 	width: 80%;
 	flex-wrap: wrap;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	gap: 1.5rem;
 	margin-bottom: 0.5rem;
 	animation: opacity 0.3s ease-in-out;
+	width: fit-content;
 }
 
 .timer-form fieldset {
@@ -77,6 +93,7 @@ nav {
 	flex-direction: row-reverse;
 	align-items: center;
 	gap: 6px;
+	width: 100%;
 }
 .timer-form label {
 	font-size: 0.85rem;
@@ -110,7 +127,6 @@ nav {
 button {
 	cursor: pointer;
 }
-
 .primary-button {
 	background-color: #1a73e8;
 	color: white;
@@ -185,7 +201,9 @@ h1.dark-theme {
 .hidden {
 	display: none;
 }
-
+.app section.dark-theme {
+	border: 1px solid rgb(46, 46, 46);
+}
 @keyframes opacity {
 	from {
 		opacity: 0;
@@ -196,13 +214,14 @@ h1.dark-theme {
 		transform: translateY(0);
 	}
 }
-@media screen and (min-width: 600px) {
-	.app section {
-		padding-right: 51.5px;
+
+@media screen and (min-width: 400px) {
+	.timer-form {
+		flex-direction: row;
+		flex-wrap: nowrap;
 	}
-	.app h1 {
+	.timer-form fieldset {
 		width: 100%;
-		text-align: center;
-		padding-left: 0;
+		flex-direction: row-reverse;
 	}
 }
