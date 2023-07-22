@@ -74,6 +74,9 @@ function resetTimer() {
 		$timer.textContent = DEFAULT_TIME
 		$resetButton.textContent = copy
 		localStorage.setItem('time', $timer.textContent)
+		if ($startButton.textContent.includes('Pausar')) {
+			$startButton.textContent = 'Iniciar'
+		}
 		$startButton.disabled = false
 		$resetButton.disabled = false
 		$startButton.classList.remove('disabled-button')

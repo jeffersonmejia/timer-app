@@ -209,6 +209,7 @@ footer {
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
+	padding-bottom: 1rem;
 }
 footer small {
 	color: rgb(97, 97, 97);
