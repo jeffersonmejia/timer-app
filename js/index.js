@@ -17,7 +17,7 @@ function startTimer() {
 			input.value = ''
 		})
 	}
-	const isStarted = $startButton.textContent === 'Iniciar'
+	const isStarted = $startButton.textContent.includes('Iniciar')
 	$startButton.textContent = isStarted ? 'Pausar' : 'Iniciar'
 
 	let [hours, minutes, seconds] = $timer.textContent.split(':')
