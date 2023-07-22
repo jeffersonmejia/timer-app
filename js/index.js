@@ -153,4 +153,10 @@ d.addEventListener('keydown', (e) => {
 		if (e.target.textContent.length > 16 && e.key !== 'Backspace') e.preventDefault()
 		if (e.key === 'Enter') e.preventDefault()
 	}
+	if (e.target.matches('.timer-form input')) {
+		let onlyNumbers = /^[0-9]$/
+		if (!onlyNumbers.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete') {
+			e.preventDefault()
+		}
+	}
 })
