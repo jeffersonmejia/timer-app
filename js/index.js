@@ -28,7 +28,6 @@ function startTimer() {
 	let [hours, minutes, seconds] = $timer.textContent.split(':')
 
 	timerInterval = setInterval(() => {
-		console.log('running...')
 		hours = parseInt(hours)
 		minutes = parseInt(minutes)
 		seconds = parseInt(seconds)
@@ -117,6 +116,7 @@ d.addEventListener('click', (e) => {
 		resetTimer()
 	}
 	if (e.target.matches('.timer')) {
+		clearInterval(timerInterval)
 		$startButton.textContent = 'Iniciar'
 		$timerForm.classList.toggle('hidden')
 	}
